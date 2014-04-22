@@ -8,6 +8,7 @@ Source0: http://downloads.sourceforge.net/project/%{name}/%{name}_all_linux.tar.
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 Requires: java-1.7.0-openjdk
+Requires: xdg-utils
 URL: http://sourceforge.net/projects/xdman/
 
 %description
