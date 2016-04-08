@@ -7,7 +7,7 @@ Group:	Networking/File transfer
 Source0: http://downloads.sourceforge.net/project/%{name}/%{name}.zip
 BuildArch: noarch
 Requires: java-1.7.0-openjdk
-Requires: xdg-utils
+BuildRequires: xdg-utils
 URL: http://sourceforge.net/projects/xdman/
 
 %description
