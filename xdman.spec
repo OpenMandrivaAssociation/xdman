@@ -1,11 +1,10 @@
 Name: xdman
-Version: 3.0.3
+Version: 5.0.74
 Release: 1
 Summary: Xtreme Download Manager
 License: GPLv2
 Group:	Networking/File transfer
-Source0: http://downloads.sourceforge.net/project/%{name}/%{name}_all_linux.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0: http://downloads.sourceforge.net/project/%{name}/%{name}.zip
 BuildArch: noarch
 Requires: java-1.7.0-openjdk
 Requires: xdg-utils
@@ -21,27 +20,23 @@ Xtreme Download Manager is powerful tool to increase download speed up-to 500%.
 %build
 
 %install
-[ -d ${RPM_BUILD_ROOT} ] && rm -rf ${RPM_BUILD_ROOT}
-mkdir ${RPM_BUILD_DIR}/%{name}-%{version}/tmp
-mkdir ${RPM_BUILD_DIR}/%{name}-%{version}/tmp/usr/
-mkdir ${RPM_BUILD_DIR}/%{name}-%{version}/tmp%{_bindir}
-mkdir ${RPM_BUILD_DIR}/%{name}-%{version}/tmp%{_datadir}
-mkdir ${RPM_BUILD_DIR}/%{name}-%{version}/tmp%{_datadir}/%{name}
+mkdir -p tmp/%{_bindir}
+mkdir -p tmp/%{_datadir}/%{name}
 
-tar -xzf ${RPM_BUILD_DIR}/%{name}-%{version}/%{name}.tar.gz -C ${RPM_BUILD_DIR}/%{name}-%{version}/tmp%{_datadir}
+unzip -d tmp/%{_datadir}/%{name} %SOURCE0 
 
 #binary
-cat << EOF > ${RPM_BUILD_DIR}/%{name}-%{version}/tmp%{_bindir}/xdman
+cat << EOF > tmp%{_bindir}/xdman
 #!/bin/sh
 java -jar /usr/share/xdman/xdman.jar
 EOF
 
-chmod +x ${RPM_BUILD_DIR}/%{name}-%{version}/tmp%{_bindir}/xdman
+chmod +x tmp%{_bindir}/xdman
 
 #desktop entry
-cat << EOF > ${RPM_BUILD_DIR}/%{name}-%{version}/%{name}-%{name}.desktop
+cat << EOF > %{name}-%{name}.desktop
 [Desktop Entry]
-Version=3.0.3
+Version=%{version}
 Encoding=UTF-8
 Name=XDMan
 GenericName=Xtreme Download Managers
@@ -49,13 +44,13 @@ Type=Application
 Categories=Internet
 Terminal=false
 StartupNotify=true
-Exec="java -jar /usr/share/xdman/xdman.jar"
+Exec="java -jar /usr/share/xdman/xdm.jar"
 Icon=/usr/share/xdman/icon.png
 EOF
 
-xdg-desktop-menu install ${RPM_BUILD_DIR}/%{name}-%{version}/%{name}-%{name}.desktop
+xdg-desktop-menu install %{name}-%{name}.desktop
 
-cp -axv ${RPM_BUILD_DIR}/%{name}-%{version}/tmp ${RPM_BUILD_ROOT}/
+cp -axv tmp/* %{buildroot}/
 
 %files
 %defattr(-,root,root)
