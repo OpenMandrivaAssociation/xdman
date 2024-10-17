@@ -8,7 +8,7 @@ Source0: http://downloads.sourceforge.net/project/%{name}/%{name}.zip
 BuildArch: noarch
 Requires: java-1.8.0-openjdk
 BuildRequires: xdg-utils
-URL: http://sourceforge.net/projects/xdman/
+URL: https://sourceforge.net/projects/xdman/
 
 %description
 Xtreme Download Manager is powerful tool to increase download speed up-to 500%.
